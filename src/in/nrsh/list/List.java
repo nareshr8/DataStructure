@@ -3,22 +3,23 @@ package in.nrsh.list;
 import java.util.Collection;
 
 /**
- * Created by Naresh on 27-08-2017.
+ * Implementation of List Java API
+ * @param <E> The Data type of items in the list
  */
 public interface List<E> {
 
-    public boolean isEmpty();
+    boolean isEmpty();
 
-    public void add(E e);
+    void add(E e);
 
-    public void add(int index,E e);
+    void add(int index,E e);
 
-    public void remove(E e);
+    void remove(int index);
 
-    public boolean isFull();
+    boolean isFull();
 
-    public int size();
+    int size();
 
-    public E get(int index);
+    E get(int index);
 
 }

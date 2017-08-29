@@ -5,22 +5,28 @@ import in.nrsh.list.List;
 import java.util.Arrays;
 
 /**
- * Created by Naresh on 27-08-2017.
+ * In ArrayList implemntation Our Big O notation is as follows:
+ * <p>
+ * Access - O(1)
+ * Insert - O(N)
+ * Remove - O(N)
+ * Add    - O(N) - Add takes constant time as, when array is full, it needs to copy all the N items to the new array.
  */
 public class ArrayList<E> implements List<E> {
 
     private int size = 0;
-    private static final int DEFAULT_CAPACITY = 2;
+    private static final int DEFAULT_CAPACITY = 10;
     private Object elements[];
 
     public ArrayList() {
-        elements = new Object[DEFAULT_CAPACITY];
+        elements = new Object[]{};
     }
 
     /**
      * Check if the list is empty
+     *
      * @return true if the list is empty
-     *         false if the list has values
+     * false if the list has values
      */
     @Override
     public boolean isEmpty() {
@@ -29,29 +35,37 @@ public class ArrayList<E> implements List<E> {
 
     /**
      * Add an element at the last of the index
+     *
      * @param e thee actual elemt to be added
      */
     @Override
     public void add(E e) {
-        if (size == elements.length) {
-            expandArray();
-        }
+        ensureCapacity(size + 1);
         elements[size++] = e;
     }
 
-    private void expandArray() {
-        elements = Arrays.copyOf(elements, size * 2);
+    private void ensureCapacity(int minSize) {
+        if (size == 0)
+            elements = new Object[DEFAULT_CAPACITY];
+        else if (size == elements.length) {
+            grow(minSize);
+        }
+    }
+
+    private void grow(int minSize) {
+        elements = Arrays.copyOf(elements, (size + (size >> 1)));
     }
 
     /**
      * Add an element to the index
+     *
      * @param index The actual index position on which the element should be added
-     * @param e the actual elemt to be added
+     * @param e     the actual elemt to be added
      */
     @Override
     public void add(int index, E e) {
         if (size == elements.length) {
-            expandArray();
+            grow(size + 1);
         }
         for (int i = size; i <= index; i--) {
             elements[i + 1] = elements[i];
@@ -62,28 +76,22 @@ public class ArrayList<E> implements List<E> {
 
     /**
      * Method to remove the element from the index
-     * @param e the actual object to remove
+     *
+     * @param index the position from which we must remove the object
      */
     @Override
-    public void remove(E e) {
-        boolean found = false;
-        for (int i = 0; i < size; i++) {
-            if (found) {
-                if (i != size - 1) {
-                    elements[i] = elements[i + 1];
-                }
-            } else {
-                if(elements[i].equals(e)){
-                    found=true;
-                    i--;
-                }
-            }
+    public void remove(int index) {
+        if (index < 0 || index > size)
+            throw new ArrayIndexOutOfBoundsException("Invalid index " + index + " when array has " + size + " elements");
+        for (int i = index; i < size - 1; i++) {
+            elements[i] = elements[i + 1];
         }
         size--;
     }
 
     /**
      * This is dynamically growing. So the List must never be considered full
+     *
      * @return false as the list is always growing
      */
     @Override
@@ -93,6 +101,7 @@ public class ArrayList<E> implements List<E> {
 
     /**
      * Get actual size of the  list
+     *
      * @return the actual size of the list
      */
     @Override
@@ -102,6 +111,7 @@ public class ArrayList<E> implements List<E> {
 
     /**
      * Mthod to retrieve the actual size of the list
+     *
      * @param index the position to look for
      * @return The actual index
      */
@@ -111,5 +121,22 @@ public class ArrayList<E> implements List<E> {
             return (E) elements[index];
         else
             throw new ArrayIndexOutOfBoundsException("Invalid index " + index + " when array has " + size + " elements");
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder simpleStringBuilder = new StringBuilder();
+        simpleStringBuilder.append("(");
+        boolean isFirst = true;
+        for (Object object : elements) {
+            if (object != null) {
+                if (!isFirst)
+                    simpleStringBuilder.append(",");
+                simpleStringBuilder.append((E) object);
+                isFirst = false;
+            }
+        }
+        simpleStringBuilder.append(")");
+        return simpleStringBuilder.toString();
     }
 }
