@@ -6,23 +6,12 @@ package in.nrsh.data.type;
  */
 public class LinearLinkNode<E> {
 
-    E data;
+    public E data;
 
-    LinearLinkNode<E> next;
+    public LinearLinkNode<E> next;
 
     public LinearLinkNode(E data){
         this.data=data;
     }
 
-    public E getData() {
-        return data;
-    }
-
-    public void setNext(LinearLinkNode<E> next) {
-        this.next = next;
-    }
-
-    public LinearLinkNode<E> getNext() {
-        return next;
-    }
 }

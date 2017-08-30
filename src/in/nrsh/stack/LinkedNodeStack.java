@@ -21,7 +21,7 @@ public class LinkedNodeStack<E> implements Stack<E> {
             head = new LinearLinkNode<E>(e);
         } else {
             LinearLinkNode<E> newHead = new LinearLinkNode<E>(e);
-            newHead.setNext(head);
+            newHead.next = head;
             head = newHead;
         }
     }
@@ -31,8 +31,8 @@ public class LinkedNodeStack<E> implements Stack<E> {
         if (head == null) {
             throw new EmptyStackException();
         }
-        E poped = head.getData();
-        head = head.getNext();
+        E poped = head.data;
+        head = head.next;
         return poped;
     }
 

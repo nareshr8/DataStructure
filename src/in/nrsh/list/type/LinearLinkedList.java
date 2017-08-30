@@ -1,5 +1,6 @@
 package in.nrsh.list.type;
 
+import in.nrsh.data.type.LinearLinkNode;
 import in.nrsh.list.List;
 
 /**
