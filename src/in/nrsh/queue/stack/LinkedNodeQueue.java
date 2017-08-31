@@ -1,19 +1,19 @@
-package in.nrsh.stack;
+package in.nrsh.queue.stack;
 
 import in.nrsh.data.type.LinearLinkNode;
 
 import java.util.EmptyStackException;
 
 /**
- * Linked list implementation of stack.
- *
- * Add and Delete Time Complexity: O(1)
- * Access Complexity: O(N)
+ * Linked list implementation of Queue.
+ * <p>
+ * Time Complexity Add and Delete: O(1)
+ * Access: ON)
  * Space Complexity: O(1)
  *
  * @param <E> The actual data that is pushed and poped out.
  */
-public class LinkedNodeStack<E> implements Stack<E> {
+public class LinkedNodeQueue<E> implements Queue<E> {
     private LinearLinkNode<E> head;
 
     @Override
@@ -29,11 +29,22 @@ public class LinkedNodeStack<E> implements Stack<E> {
 
     @Override
     public E pop() {
+        E poped;
         if (head == null) {
             throw new EmptyStackException();
+        } else if (head.next == null) {
+            poped = head.data;
+            head = null;
+        } else if (head.next.next == null) {
+            poped = head.next.data;
+            head.next = null;
+        } else {
+            LinearLinkNode<E> linkedNode = head;
+            while (linkedNode.next.next != null) {
+                linkedNode = linkedNode.next;
+            }
+            poped = linkedNode.data;
         }
-        E poped = head.data;
-        head = head.next;
         return poped;
     }
 
