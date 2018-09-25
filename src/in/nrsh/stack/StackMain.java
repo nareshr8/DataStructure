@@ -1,5 +1,7 @@
 package in.nrsh.stack;
 
+import in.nrsh.stack.type.LinkedNodeStack;
+
 /**
  * Created by Naresh on 29-08-2017.
  */

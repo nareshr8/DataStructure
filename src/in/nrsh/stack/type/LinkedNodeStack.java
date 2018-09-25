@@ -1,6 +1,7 @@
-package in.nrsh.stack;
+package in.nrsh.stack.type;
 
 import in.nrsh.data.type.LinearLinkNode;
+import in.nrsh.stack.Stack;
 
 import java.util.EmptyStackException;
 
@@ -29,7 +30,7 @@ public class LinkedNodeStack<E> implements Stack<E> {
 
     @Override
     public E pop() {
-        if (head == null) {
+        if (isEmpty()) {
             throw new EmptyStackException();
         }
         E poped = head.data;
@@ -38,7 +39,27 @@ public class LinkedNodeStack<E> implements Stack<E> {
     }
 
     @Override
+    public E peek() {
+        return head.data;
+    }
+
+    @Override
+    public int capacity() {
+        return -1;
+    }
+
+    @Override
+    public int capacityRemaining() {
+        return -1;
+    }
+
+    @Override
+    public void empty() {
+        head=null;
+    }
+
+    @Override
     public boolean isEmpty() {
-        return false;
+        return head==null;
     }
 }

@@ -40,19 +40,19 @@ public class ArrayList<E> implements List<E> {
      */
     @Override
     public void add(E e) {
-        ensureCapacity(size + 1);
+        ensureCapacity();
         elements[size++] = e;
     }
 
-    private void ensureCapacity(int minSize) {
+    private void ensureCapacity() {
         if (size == 0)
             elements = new Object[DEFAULT_CAPACITY];
         else if (size == elements.length) {
-            grow(minSize);
+            grow();
         }
     }
 
-    private void grow(int minSize) {
+    private void grow() {
         elements = Arrays.copyOf(elements, (size + (size >> 1)));
     }
 
@@ -65,7 +65,7 @@ public class ArrayList<E> implements List<E> {
     @Override
     public void add(int index, E e) {
         if (size == elements.length) {
-            grow(size + 1);
+            grow();
         }
         for (int i = size; i <= index; i--) {
             elements[i + 1] = elements[i];

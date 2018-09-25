@@ -5,9 +5,17 @@ package in.nrsh.stack;
  */
 public interface Stack<E> {
 
-    public void push(E e);
+    void push(E e);
 
-    public E pop();
+    E pop();
 
-    public boolean isEmpty();
+    E peek();
+
+    int capacity();
+
+    int capacityRemaining();
+
+    void empty();
+
+    boolean isEmpty();
 }
